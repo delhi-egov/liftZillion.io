@@ -8,8 +8,8 @@
                 $locationProvider.html5Mode(false);
                 $locationProvider.hashPrefix('!');
 
-                $routeProvider.when('/', {
-                    templateUrl: '/templates/index.html',
+                $routeProvider.when('/application', {
+                    templateUrl: '/templates/deputy.html',
                     resolve: {
                         seo: ['$rootScope', function ($rootScope) {
                             $rootScope.title = 'app.routes';

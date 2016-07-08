@@ -1,9 +1,3 @@
-/**
- * Created by jafarnaqvi on 10/06/16.
- */
-
-(function(){
-
-    angular.module('app.formA',[]);
-
+(function () {
+  angular.module('app.formA', []);
 })();

@@ -1,9 +1,5 @@
-/**
- * Created by jafarnaqvi on 10/06/16.
- */
+(function () {
 
-(function(){
-
-    angular.module('app.services',[]);
+  angular.module('app.services', []);
 
 })();

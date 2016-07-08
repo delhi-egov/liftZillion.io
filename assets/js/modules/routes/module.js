@@ -1,9 +1,5 @@
-/**
- * Created by jafarnaqvi on 10/06/16.
- */
+(function () {
 
-(function(){
-
-    angular.module('app.routes',['ngRoute']);
+  angular.module('app.routes', ['ngRoute']);
 
 })();

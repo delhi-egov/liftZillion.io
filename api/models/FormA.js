@@ -88,7 +88,7 @@ module.exports = {
       type: 'float',
       required: true
     },
-    
+
     depth_pit: {
       type: 'float',
       required: true
@@ -142,7 +142,10 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false
     }
-
+  },
+  beforeCreate: function (attrs, callback) {
+    console.log(attrs);
+    return callback();
   }
 };
 

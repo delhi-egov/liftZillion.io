@@ -20,32 +20,81 @@
 module.exports.policies = {
 
   /***************************************************************************
-  *                                                                          *
-  * Default policy for all controllers and actions (`true` allows public     *
-  * access)                                                                  *
-  *                                                                          *
-  ***************************************************************************/
+   *                                                                          *
+   * Default policy for all controllers and actions (`true` allows public     *
+   * access)                                                                  *
+   *                                                                          *
+   ***************************************************************************/
 
   // '*': true,
 
   /***************************************************************************
-  *                                                                          *
-  * Here's an example of mapping some policies to run before a controller    *
-  * and its actions                                                          *
-  *                                                                          *
-  ***************************************************************************/
-	// RabbitController: {
+   *                                                                          *
+   * Here's an example of mapping some policies to run before a controller    *
+   * and its actions                                                          *
+   *                                                                          *
+   ***************************************************************************/
 
-		// Apply the `false` policy as the default for all of RabbitController's actions
-		// (`false` prevents all access, which ensures that nothing bad happens to our rabbits)
-		// '*': false,
+  FormAController: {
+    '*': 'superAdmin',
+    'find': 'formGet',
+    'create': 'formPost',
+    'update': 'formPut'
+  },
 
-		// For the action `nurture`, apply the 'isRabbitMother' policy
-		// (this overrides `false` above)
-		// nurture	: 'isRabbitMother',
+  InspectorReportController: {
+    '*': 'superAdmin',
+    'find': 'reportGet',
+    'create': 'reportPost'
+  },
 
-		// Apply the `isNiceToAnimals` AND `hasRabbitFood` policies
-		// before letting any users feed our rabbits
-		// feed : ['isNiceToAnimals', 'hasRabbitFood']
-	// }
+  AssignController: {
+    '*': 'superAdmin',
+    'find': 'assignGet',
+    'create': 'assignPost',
+    'update': 'assignPut'
+  },
+
+  //Admin can't be altered by anyone
+  AdminOfficeController: {
+    '*': 'superAdmin',
+    'login': 'login'
+  },
+
+  //Applicant can't be altered by anyone
+  ApplicantController: {
+    '*': 'superAdmin',
+    'create': 'login',
+    'login': 'login',
+    'update':'applicant'
+  },
+
+  //DEI <- Admin
+  DeputyInspectorController: {
+    '*': 'adminControl',
+    'login': 'login'
+  },
+
+  //Inspector <- Admin
+  InspectorController: {
+    '*': 'adminControl',
+    'login': 'login'
+  }
+
+
+
+  // RabbitController: {
+
+  // Apply the `false` policy as the default for all of RabbitController's actions
+  // (`false` prevents all access, which ensures that nothing bad happens to our rabbits)
+  // '*': false,
+
+  // For the action `nurture`, apply the 'isRabbitMother' policy
+  // (this overrides `false` above)
+  // nurture	: 'isRabbitMother',
+
+  // Apply the `isNiceToAnimals` AND `hasRabbitFood` policies
+  // before letting any users feed our rabbits
+  // feed : ['isNiceToAnimals', 'hasRabbitFood']
+  // }
 };

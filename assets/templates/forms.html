@@ -1,0 +1,93 @@
+<!--Forms Table-->
+<div class="col-md-12" ng-controller="userTableController as userController">
+  <div class="panel panel-default ">
+    <div class="panel-heading"><span class="fa fa-users text-primary"></span><span
+      class="text-primary vcenter"> Users</span>
+    </div>
+    <!--<ul class="nav nav-tabs nav-default">
+        <li ng-click="user.TabClicked('new')" ng-class="{ 'active': user.tabname==='new' }"><a href=""><span
+                class="fa fa-globe text-primary"></span><span
+                class="text-primary vcenter"> New</span></a></li>
+        <li ng-click="user.TabClicked('test')" ng-class="{ 'active': user.tabname==='test' }"><a
+                href=""><span
+                class="fa fa-clone text-primary"></span><span
+                class="text-primary vcenter"> Test</span></a></li>
+        <li ng-click="user.TabClicked('repeat')" ng-class="{ 'active': user.tabname==='repeat' }"><a
+                href=""><span
+                class="fa fa-repeat text-primary"></span><span
+                class="text-primary vcenter"> Repeat</span></a>
+        </li>
+        <li ng-click="user.TabClicked('nonPicked')" ng-class="{ 'active': user.tabname==='nonPicked' }"><a
+                href=""><span
+                class="fa fa-exclamation text-primary"></span><span
+                class="text-primary vcenter"> Non Picked</span></a>
+        </li>
+    </ul>-->
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-12">
+
+          <table st-table="userController.tempObj" st-safe-src="userController.origObj"
+                 class="row-border hover table table-striped">
+            <thead>
+            <tr>
+              <th colspan="5"><input st-search="" class="form-control" placeholder="Global Search ..."
+                                     type="text"/></th>
+            </tr>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Joined</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="userdetails in userController.tempObj track by userdetails.id">
+
+              <td>
+                <button ng-click="userController.update(userdetails)" type="button"
+
+                        class="btn btn-sm btn-warning">
+                  <em class="fa fa-edit"></em>
+                </button>
+                <button ng-click="userController.delete(userdetails)" type="button"
+                        class="btn btn-sm btn-danger">
+                  <em class="fa fa-trash-o"></em>
+                </button>
+              </td>
+              <td><textarea ng-model="userdetails.name"
+                            ng-attr-rows="{{row || '1'}}"
+                            ng-focus="row=3"
+                            ng-blur="row=1" cols="20">{{userdetails.name}}
+                                 </textarea>
+              </td>
+              <td><textarea ng-model="userdetails.email"
+                            ng-attr-rows="{{row || '1'}}"
+                            ng-focus="row=3"
+                            ng-blur="row=1" cols="20">{{userdetails.email}}
+                                 </textarea>
+              </td>
+              <td><textarea ng-model="userdetails.createdAt"
+                            ng-attr-rows="{{row || '1'}}"
+                            ng-focus="row=3"
+                            ng-blur="row=1" cols="20">{{userdetails.createdAt}}
+                                 </textarea>
+              </td>
+              <!--<td>
+                  {{user.timestamp}}
+              </td>-->
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+              <td colspan="5" class="text-center">
+                <div st-pagination="" st-items-by-page="10" st-displayed-pages="9999"></div>
+              </td>
+            </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
