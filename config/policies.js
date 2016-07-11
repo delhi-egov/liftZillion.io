@@ -44,21 +44,21 @@ module.exports.policies = {
 
   InspectorReportController: {
     '*': 'superAdmin',
-    'find': 'reportGet',
-    'create': 'reportPost'
+    // /'find': 'reportGet'
   },
 
   AssignController: {
-    '*': 'superAdmin',
-    'find': 'assignGet',
-    'create': 'assignPost',
-    'update': 'assignPut'
+    '*': 'superAdmin'
+    //'find': 'assignGet'
+    //'create': 'assignPost',
+    //'update': 'assignPut'
   },
 
   //Admin can't be altered by anyone
   AdminOfficeController: {
     '*': 'superAdmin',
-    'login': 'login'
+    'login': 'login',
+    'changePswd': 'admin'
   },
 
   //Applicant can't be altered by anyone
@@ -66,19 +66,28 @@ module.exports.policies = {
     '*': 'superAdmin',
     'create': 'login',
     'login': 'login',
-    'update':'applicant'
+    'changePswd': 'applicant'
   },
 
   //DEI <- Admin
   DeputyInspectorController: {
-    '*': 'adminControl',
-    'login': 'login'
+    '*': 'admin',
+    'login': 'login',
+    'assignForm': 'deputy',
+    'confirmForm': 'deputy',
+    'rejectForm': 'deputy',
+    'recheckForm': 'deputy',
+    'changePswd': 'deputy',
+    'fetchCompletedReport': 'deputy'
   },
 
   //Inspector <- Admin
   InspectorController: {
-    '*': 'adminControl',
-    'login': 'login'
+    '*': 'admin',
+    'login': 'login',
+    'changePswd': 'inspector',
+    'fetchAssignedForms': 'inspector',
+    'submitReport': 'inspector'
   }
 
 

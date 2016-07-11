@@ -31,6 +31,11 @@ module.exports = {
       type: 'String',
       required: true
     },
+    assocReports: {
+      collection: 'inspectorreport',
+      via: 'assocInspector'
+    },
+
     verifyPassword: function (password) {
       if (password === undefined)
         return false;

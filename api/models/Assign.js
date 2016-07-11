@@ -23,10 +23,22 @@ module.exports = {
       required: true
     },
 
-    inspectorStatus: {
+    status: {
       type: 'string',
-      enum: ['pending', 'accepted', 'completed'],
+      enum: ['pending', 'scheduled', 'completed'],
       defaultsTo: 'pending'
+    },
+
+    scheduledDate: {
+      type: 'string'
+    },
+
+    completedOn: {
+      type: 'string'
+    },
+
+    assocReport: {
+      model: 'inspectorReport'
     }
   }
 };

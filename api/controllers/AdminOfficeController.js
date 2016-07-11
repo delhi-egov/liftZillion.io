@@ -21,7 +21,6 @@ function createToken(obj) {
 
 module.exports = {
   login: function (req, res) {
-    console.log("Login Admin");
     AdminOffice.findOne({email: req.body.email}).exec(function (err, obj) {
 
       if (!obj) {
@@ -35,12 +34,41 @@ module.exports = {
             admin: obj,
             token: createToken(obj)
           });
+          console.log("-- admin_login --");
         }
         else
           res.status(status.FORBIDDEN).json({status: "failed", message: "Unauthorised Access"});
       }
-
     });
+  },
+  changePswd: function (req, res) {
+    var decoded = jsonwebtoken.decode(req.headers.access_token);
+    if (req.body.oldPswd && req.body.newPswd) {
+      var oldpswd = req.body.oldPswd;
+      var newpswd = req.body.newPswd;
+      AdminOffice.findOne({id: decoded.id}).exec(function change(err, obj) {
+        if (err) {
+          res.status(403).send({status: "failed", message: "1"});
+        } else {
+          if (bcrypt.compareSync(oldpswd, obj.password)) {
+            bcrypt.hash(newpswd, SALT_WORK_FACTOR, function (err, hash) {
+              obj.password = hash;
+              if (err) {
+                res.status(403).send({status: "failed", message: "3"});
+              } else {
+                obj.save();
+                res.status(status.ACCEPTED).send({status: "success", message: "password changed successfully"});
+                console.log("## admin password changed  ##");
+              }
+            });
+          } else {
+            res.status(403).send({status: "failed", message: "2"});
+          }
+        }
+      });
+    } else {
+      res.status(403).send({status: "failed", message: "Insufficient Details"});
+    }
   }
 };
 

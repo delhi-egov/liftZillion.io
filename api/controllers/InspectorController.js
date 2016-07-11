@@ -10,6 +10,9 @@ var status = require("http-status-codes");
 var jsonwebtoken = require('jsonwebtoken');
 var config = require('./../../config');
 
+var bcrypt = require('bcryptjs');
+var SALT_WORK_FACTOR = 10;
+
 function createToken(obj) {
 
   var token = jsonwebtoken.sign({
@@ -41,6 +44,66 @@ module.exports = {
       }
 
     });
+  },
+  changePswd: function (req, res) {
+    var decoded = jsonwebtoken.decode(req.headers.access_token);
+    if (req.body.oldPswd && req.body.newPswd) {
+      var oldpswd = req.body.oldPswd;
+      var newpswd = req.body.newPswd;
+      Inspector.findOne({id: decoded.id}).exec(function change(err, obj) {
+        if (err) {
+          res.status(403).send({status: "failed", message: "No Such Inspector"});
+        } else {
+          if (bcrypt.compareSync(oldpswd, obj.password)) {
+            bcrypt.hash(newpswd, SALT_WORK_FACTOR, function (err, hash) {
+              obj.password = hash;
+              if (err) {
+                res.status(403).send({status: "failed", message: "Error while changing password"});
+              } else {
+                obj.save();
+                res.status(status.ACCEPTED).send({status: "success", message: "password changed successfully"});
+              }
+            });
+          } else {
+            res.status(403).send({status: "failed", message: "Incorrect Password"});
+          }
+        }
+      });
+    } else {
+      res.status(403).send({status: "failed", message: "Insufficient Details"});
+    }
+  },
+  fetchAssignedForms: function (req, res) {
+    var decoded = jsonwebtoken.decode(req.headers.access_token);
+    Assign.find({assocInspector: decoded.id}).populate('assocForm').exec(function getAssigned(err, obj) {
+      res.status(status.ACCEPTED).send(obj);
+    });
+  },
+  submitReport: function (req, res) {
+    var decoded = jsonwebtoken.decode(req.headers.access_token);
+    var assignId = req.body.assignId;
+    var reportId = '';
+    if (assignId) {
+      InspectorReport.create({assocInspector: decoded.id}).exec(function createReport(err, obj) {
+        if (err) {
+          res.status(403).send({status: "failed", message: "Report Submission Failed"});
+        } else {
+          reportId = obj;
+          Assign.findOne({id: assignId}).exec(function (err, assign) {
+            if (err) {
+              res.status(403).send({status: "failed", message: "Report Submission Failed 2"});
+            } else {
+              assign.status = 'completed';
+              assign.assocReport = reportId;
+              assign.save();
+              res.status(status.ACCEPTED).send({status: "success", message: "report Submission Success"});
+            }
+          });
+        }
+      });
+    } else {
+      res.status(403).send({status: "failed", message: "Insufficient Details"});
+    }
   }
 };
 

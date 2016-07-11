@@ -6,10 +6,10 @@
 
   angular
     .module('app.main')
-    .service('applicationRangular', dataHolder);
+    .service('LoginRangular', LoginRangular);
 
-  dataHolder.$inject = ['Restangular','verifyLoginService'];
-  function dataHolder(Restangular,verifyLoginService) {
+  LoginRangular.$inject = ['Restangular','verifyLoginService'];
+  function LoginRangular(Restangular,verifyLoginService) {
 
     return Restangular.withConfig(function (RestangularConfigurer) {
 

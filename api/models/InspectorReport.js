@@ -64,6 +64,10 @@ module.exports = {
     },
     remark: {
       type: 'string'
+    },
+    assocInspector: {
+      model: 'inspector',
+      required: true
     }
   }
 }

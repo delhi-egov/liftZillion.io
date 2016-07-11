@@ -1,10 +1,15 @@
-<!--Forms Table-->
-<div class="col-md-12" ng-controller="userTableController as userController">
+<div ng-controller="FormaController as forma">
+  Hello
+</div>
+
+<!--
+&lt;!&ndash;Forms Table&ndash;&gt;
+<div class="col-md-12" ng-controller="FormaController as userController">
   <div class="panel panel-default ">
     <div class="panel-heading"><span class="fa fa-users text-primary"></span><span
       class="text-primary vcenter"> Users</span>
     </div>
-    <!--<ul class="nav nav-tabs nav-default">
+    &lt;!&ndash;<ul class="nav nav-tabs nav-default">
         <li ng-click="user.TabClicked('new')" ng-class="{ 'active': user.tabname==='new' }"><a href=""><span
                 class="fa fa-globe text-primary"></span><span
                 class="text-primary vcenter"> New</span></a></li>
@@ -22,7 +27,7 @@
                 class="fa fa-exclamation text-primary"></span><span
                 class="text-primary vcenter"> Non Picked</span></a>
         </li>
-    </ul>-->
+    </ul>&ndash;&gt;
     <div class="panel-body">
       <div class="row">
         <div class="col-md-12">
@@ -73,9 +78,9 @@
                             ng-blur="row=1" cols="20">{{userdetails.createdAt}}
                                  </textarea>
               </td>
-              <!--<td>
+              &lt;!&ndash;<td>
                   {{user.timestamp}}
-              </td>-->
+              </td>&ndash;&gt;
             </tr>
             </tbody>
             <tfoot>
@@ -91,3 +96,4 @@
     </div>
   </div>
 </div>
+-->
