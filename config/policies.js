@@ -48,8 +48,8 @@ module.exports.policies = {
   },
 
   AssignController: {
-    '*': 'superAdmin'
-    //'find': 'assignGet'
+    '*': 'superAdmin',
+    'find': 'assignGet'
     //'create': 'assignPost',
     //'update': 'assignPut'
   },
