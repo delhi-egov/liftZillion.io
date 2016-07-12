@@ -183,6 +183,25 @@ module.exports = {
     } else {
       res.status(403).send({status: "failed", message: "1"});
     }
+  },
+  fetchForms: function (req, res) {
+    FormA.find().exec(function (err, obj) {
+      if (err) {
+        res.status(403).send({status: "failed", message: "Form not Available"});
+      } else {
+        res.status(status.ACCEPTED).send(obj);
+      }
+    });
+  },
+  fetchAssigned: function (req, res) {
+    var decoded = jsonwebtoken.decode(req.headers.access_token);
+    Assign.find({assocDeputyId: decoded.id}).exec(function (err, obj) {
+      if (err) {
+        res.status(403).send({status: "failed", message: "No Form Assigned"});
+      } else {
+        res.status(status.ACCEPTED).send(obj);
+      }
+    });
   }
 };
 

@@ -7,6 +7,31 @@ angular.module('app.main')
 FormaController.$inject = ['FormaRangular', 'verifyLoginService', 'Restangular'];
 
 function FormaController(FormaRangular, verifyLoginService, Restangular) {
+
+  var form = FormaRangular.all('/deputyinspector/fetchForms');
+
   var scope = this;
+
+  scope.tempObj = [];
+  scope.tabname = 'pending';
+  scope.origObj = [];
+
+  form.post({}, {}, {'access_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJoYXJpb21AemlsbGlvbi5pbyIsImlhdCI6MTQ2ODI0MjY4NH0.qNFWrPlwyRuvKU78UDsBp7d7dNTAIY6x0780OmC2zU0'}).then(function (data) {
+    console.log(data);
+    scope.origObj = data;
+    /*fsdc.origObj = data;
+     VerifyLoginService.catId = null;*/
+  });
+
+  scope.objFilter = function (obj) {
+    if (obj.status == scope.tabname) {
+      return true;
+    }
+  };
+
+  scope.TabClicked = function (tabname) {
+    scope.tabname = tabname;
+    console.log(tabname);
+  };
   //var baseUser = userRangular.all('/user', {xyz: ''}, {'x-access-token': VerifyLoginService.getToken()});
 }

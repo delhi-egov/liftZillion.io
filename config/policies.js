@@ -78,7 +78,9 @@ module.exports.policies = {
     'rejectForm': 'deputy',
     'recheckForm': 'deputy',
     'changePswd': 'deputy',
-    'fetchCompletedReport': 'deputy'
+    'fetchCompletedReport': 'deputy',
+    'fetchForms': 'deputy',
+    'fetchAssigned': 'deputy'
   },
 
   //Inspector <- Admin

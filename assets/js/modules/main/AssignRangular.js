@@ -6,13 +6,13 @@
 
   angular
     .module('app.main')
-    .service('FormaRangular', FormaRangular);
+    .service('AssignRangular', AssignRangular);
 
-  FormaRangular.$inject = ['Restangular'];
-  function FormaRangular(Restangular) {
+  AssignRangular.$inject = ['Restangular'];
+  function AssignRangular(Restangular) {
 
     return Restangular.withConfig(function (RestangularConfigurer) {
-      
+
       /*      RestangularConfigurer.addElementTransformer('/subcategory/'+VerifyLoginService.catId, false, function (element) {
        return element;
        });*/

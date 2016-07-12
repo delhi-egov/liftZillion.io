@@ -1,8 +1,8 @@
-<!--Forms Table-->
-<div class="col-md-12" ng-controller="FormaController as obj">
+<!--Assign Table-->
+<div class="col-md-12" ng-controller="AssignController as obj">
   <div class="panel panel-default ">
     <div class="panel-heading"><span class="fa fa-users text-primary"></span><span
-      class="text-primary vcenter">Applicant Forms</span>
+      class="text-primary vcenter">Form Report Status</span>
     </div>
     <ul class="nav nav-tabs nav-default">
       <li ng-click="obj.TabClicked('pending')" ng-class="{ 'active': obj.tabname==='pending' }"><a href=""><span
@@ -41,7 +41,6 @@
             </tr>
             <tr>
               <th></th>
-              <th>Form Id</th>
               <th>Applicant Name</th>
               <th>Applicant Address</th>
               <th>Agent Name</th>
@@ -84,7 +83,6 @@
                   <em class="fa fa-close"></em>
                 </button>
               </td>
-              <td>{{objdetails.id}}</td>
               <td>{{objdetails.applicant_name}}</td>
               <td>{{objdetails.applicant_address}}</td>
               <td>{{objdetails.agent_name}}</td>

@@ -1,0 +1,17 @@
+.scrolling-table {
+  display: block;
+  overflow-x: auto;
+}
+
+.dialog-div {
+  display: inline;
+}
+
+.category-img {
+  width: 23%;
+  margin: 2px;
+  border: 1px solid #009688;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
