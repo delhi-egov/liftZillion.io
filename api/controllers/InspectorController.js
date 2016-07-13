@@ -84,7 +84,8 @@ module.exports = {
     var assignId = req.body.assignId;
     var reportId = '';
     if (assignId) {
-      InspectorReport.create({assocInspector: decoded.id}).exec(function createReport(err, obj) {
+      req.body.assocInspector = decoded.id;
+      InspectorReport.create(req.body).exec(function createReport(err, obj) {
         if (err) {
           res.status(403).send({status: "failed", message: "Report Submission Failed"});
         } else {

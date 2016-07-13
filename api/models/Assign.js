@@ -30,11 +30,13 @@ module.exports = {
     },
 
     scheduledDate: {
-      type: 'string'
+      type: 'string',
+      defaultsTo: 'Not Scheduled'
     },
 
     completedOn: {
-      type: 'string'
+      type: 'string',
+      defaultsTo: 'Not Completed'
     },
 
     assocReport: {

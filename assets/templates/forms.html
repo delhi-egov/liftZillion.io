@@ -73,12 +73,12 @@
               ng-repeat="objdetails in obj.tempObj | filter: obj.objFilter track by objdetails.id">
 
               <td>
-                <button ng-click="obj.assign(objdetails)" type="button"
+                <button ng-click="obj.assignForm(objdetails.id)" type="button"
                         ng-show="objdetails.status == 'pending'"
                         class="btn btn-sm btn-success">
                   <em class="fa fa-arrow-circle-right"></em>
                 </button>
-                <button ng-click="obj.reject(objdetails)" type="button"
+                <button ng-click="obj.rejectForm(objdetails.id)" type="button"
                         ng-show="objdetails.status == 'pending'"
                         class="btn btn-sm btn-danger">
                   <em class="fa fa-close"></em>
@@ -120,6 +120,20 @@
             </tr>
             </tfoot>
           </table>
+          <div class="container-fluid btn-toolbar">
+            <select class="btn btn-default col-xs-2" ng-model="assigneeVal">
+              <option value="" disabled>Select Inspector</option>
+              <option ng-repeat="assignee in table1.assignees"
+                      value="{{assignee.value}}">
+                {{assignee.name}}
+              </option>
+            </select>
+            <button type="button" ng-click="table1.changeStatus(assigneeVal)"
+                    class="btn btn-sm btn-primary">
+              <em class="fa fa-tag "></em>
+            </button>
+
+          </div>
         </div>
       </div>
     </div>

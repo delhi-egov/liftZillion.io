@@ -1,5 +1,5 @@
 <!--Assign Table-->
-<div class="col-md-12" ng-controller="AssignController as obj">
+<div class="col-md-12" ng-controller="AssignTableController as obj">
   <div class="panel panel-default ">
     <div class="panel-heading"><span class="fa fa-users text-primary"></span><span
       class="text-primary vcenter">Form Report Status</span>
@@ -41,30 +41,11 @@
             </tr>
             <tr>
               <th></th>
-              <th>Applicant Name</th>
-              <th>Applicant Address</th>
-              <th>Agent Name</th>
-              <th>Agent Address</th>
-              <th>Previous License</th>
-              <th>Firm Name</th>
-              <th>Firm Address</th>
-              <th>Lift Type</th>
-              <th>Lift Speed</th>
-              <th>Lift Capacity</th>
-              <th>Lift Total Weight</th>
-              <th>Max Passenger</th>
-              <th>Weight Counter</th>
-              <th>No of Weights</th>
-              <th>Supporting Cable Desc.</th>
-              <th>Supporting Cable Weight</th>
-              <th>Supporting Cable Size</th>
-              <th>Depth Pit</th>
-              <th>Top Clearance</th>
-              <th>Bottom Clearance</th>
-              <th>Overhead Arrangement</th>
-              <th>No. of stops</th>
-              <th>Contact Person</th>
-              <th>Contact Number</th>
+              <th>Form ID</th>
+              <th>Inspector</th>
+              <th>Schedule Date</th>
+              <th>Completed On</th>
+              <th>Inspector Report</th>
             </tr>
             </thead>
             <tbody>
@@ -72,42 +53,22 @@
               ng-repeat="objdetails in obj.tempObj | filter: obj.objFilter track by objdetails.id">
 
               <td>
-                <button ng-click="obj.assign(objdetails)" type="button"
+                <button ng-click="obj.assignForm(objdetails.id)" type="button"
                         ng-show="objdetails.status == 'pending'"
                         class="btn btn-sm btn-success">
                   <em class="fa fa-arrow-circle-right"></em>
                 </button>
-                <button ng-click="obj.reject(objdetails)" type="button"
+                <button ng-click="obj.rejectForm(objdetails.id)" type="button"
                         ng-show="objdetails.status == 'pending'"
                         class="btn btn-sm btn-danger">
                   <em class="fa fa-close"></em>
                 </button>
               </td>
-              <td>{{objdetails.applicant_name}}</td>
-              <td>{{objdetails.applicant_address}}</td>
-              <td>{{objdetails.agent_name}}</td>
-              <td>{{objdetails.agent_address}}</td>
-              <td>{{objdetails.previous_license}}</td>
-              <td>{{objdetails.firm_name}}</td>
-              <td>{{objdetails.firm_address}}</td>
-              <td>{{objdetails.lift_type}}</td>
-              <td>{{objdetails.lift_speed_max}}</td>
-              <td>{{objdetails.lift_capacity_weight}}</td>
-              <td>{{objdetails.lift_total_weight}}</td>
-              <td>{{objdetails.max_passengers}}</td>
-              <td>{{objdetails.weight_counter}}</td>
-              <td>{{objdetails.description_weight_num}}</td>
-              <td>{{objdetails.supporting_cable_description}}</td>
-              <td>{{objdetails.supporting_cable_weight}}</td>
-              <td>{{objdetails.supporting_cable_size}}</td>
-              <td>{{objdetails.depth_pit}}</td>
-              <td>{{objdetails.top_clearance}}</td>
-              <td>{{objdetails.bottom_clearance}}</td>
-              <td>{{objdetails.overhead_arrangement}}</td>
-              <td>{{objdetails.number_of_stops}}</td>
-              <td>{{objdetails.contact_person_name}}</td>
-              <td>{{objdetails.contact_person_number}}</td>
-              <td>{{objdetails.drawings_path}}</td>
+              <td>{{objdetails.assocForm}}</td>
+              <td>{{objdetails.assocInspector.name}}</td>
+              <td>{{objdetails.scheduledDate}}</td>
+              <td>{{objdetails.completedOn}}</td>
+              <td>{{objdetails.assocReport.id}}</td>
             </tr>
             </tbody>
             <tfoot>

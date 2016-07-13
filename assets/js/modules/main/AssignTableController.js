@@ -2,11 +2,11 @@
  * Created by dinesh3836 on 11-07-2016.
  */
 angular.module('app.main')
-  .controller('AssignController', AssignController);
+  .controller('AssignTableController', AssignTableController);
 
-AssignController.$inject = ['AssignRangular', 'verifyLoginService'];
+AssignTableController.$inject = ['AssignRangular', 'verifyLoginService'];
 
-function AssignController(AssignRangular, verifyLoginService) {
+function AssignTableController(AssignRangular, verifyLoginService) {
 
   var allAssign = AssignRangular.all('/deputyinspector/fetchAssigned');
 
@@ -22,6 +22,7 @@ function AssignController(AssignRangular, verifyLoginService) {
     /*fsdc.origObj = data;
      VerifyLoginService.catId = null;*/
   });
+  
 
   scope.assignFilter = function (assigned) {
     if (assigned.status == scope.tabname) {

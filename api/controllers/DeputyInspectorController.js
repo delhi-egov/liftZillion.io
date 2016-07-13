@@ -195,7 +195,7 @@ module.exports = {
   },
   fetchAssigned: function (req, res) {
     var decoded = jsonwebtoken.decode(req.headers.access_token);
-    Assign.find({assocDeputyId: decoded.id}).exec(function (err, obj) {
+    Assign.find({assocDeputyId: decoded.id}).populate('assocInspector', 'assocReport').exec(function (err, obj) {
       if (err) {
         res.status(403).send({status: "failed", message: "No Form Assigned"});
       } else {
