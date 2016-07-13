@@ -80,7 +80,8 @@ module.exports.policies = {
     'changePswd': 'deputy',
     'fetchCompletedReport': 'deputy',
     'fetchForms': 'deputy',
-    'fetchAssigned': 'deputy'
+    'fetchAssigned': 'deputy',
+    'fetchInspectorList': 'deputy'
   },
 
   //Inspector <- Admin

@@ -20,7 +20,7 @@
       <li ng-click="obj.TabClicked('finished')" ng-class="{ 'active': obj.tabname==='finished' }"><a
         href=""><span
         class="fa fa-repeat text-primary"></span><span
-        class="text-primary vcenter"> Completed</span></a>
+        class="text-primary vcenter"> Finished</span></a>
       </li>
     </ul>
     <div class="panel-body">
@@ -41,7 +41,7 @@
               <th>Inspector</th>
               <th>Schedule Date</th>
               <th>Completed On</th>
-              <th>Inspector Report</th>
+              <th ng-show="objdetails.status == 'completed'">Inspector Report</th>
             </tr>
             </thead>
             <tbody>
@@ -70,7 +70,7 @@
               <td>{{objdetails.assocInspector.name}}</td>
               <td>{{objdetails.scheduledDate}}</td>
               <td>{{objdetails.completedOn}}</td>
-              <td>{{objdetails.assocReport.id}}</td>
+              <td ng-show="objdetails.status == 'completed'">{{objdetails.assocReport.id}}</td>
             </tr>
             </tbody>
             <tfoot>
