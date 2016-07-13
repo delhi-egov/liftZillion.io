@@ -8,24 +8,19 @@
       <li ng-click="obj.TabClicked('pending')" ng-class="{ 'active': obj.tabname==='pending' }"><a href=""><span
         class="fa fa-globe text-primary"></span><span
         class="text-primary vcenter"> Pending</span></a></li>
-      <li ng-click="obj.TabClicked('assigned')" ng-class="{ 'active': obj.tabname==='assigned' }"><a
+      <li ng-click="obj.TabClicked('scheduled')" ng-class="{ 'active': obj.tabname==='scheduled' }"><a
         href=""><span
         class="fa fa-clone text-primary"></span><span
-        class="text-primary vcenter"> Assigned</span></a></li>
-      <li ng-click="obj.TabClicked('recheck')" ng-class="{ 'active': obj.tabname==='recheck' }"><a
+        class="text-primary vcenter"> Scheduled</span></a></li>
+      <li ng-click="obj.TabClicked('completed')" ng-class="{ 'active': obj.tabname==='completed' }"><a
         href=""><span
         class="fa fa-repeat text-primary"></span><span
-        class="text-primary vcenter"> Recheck</span></a>
+        class="text-primary vcenter"> Completed</span></a>
       </li>
-      <li ng-click="obj.TabClicked('confirmed')" ng-class="{ 'active': obj.tabname==='confirmed' }"><a
+      <li ng-click="obj.TabClicked('finished')" ng-class="{ 'active': obj.tabname==='finished' }"><a
         href=""><span
-        class="fa fa-exclamation text-primary"></span><span
-        class="text-primary vcenter"> Confirmed</span></a>
-      </li>
-      <li ng-click="obj.TabClicked('rejected')" ng-class="{ 'active': obj.tabname==='rejected' }"><a
-        href=""><span
-        class="fa fa-exclamation text-primary"></span><span
-        class="text-primary vcenter"> Rejected</span></a>
+        class="fa fa-repeat text-primary"></span><span
+        class="text-primary vcenter"> Completed</span></a>
       </li>
     </ul>
     <div class="panel-body">
@@ -33,7 +28,7 @@
         <div class="col-md-12">
 
           <table st-table="obj.tempObj" st-safe-src="obj.origObj"
-                 class="row-border hover table table-striped scrolling-table">
+                 class="row-border hover table table-">
             <thead>
             <tr>
               <th colspan="5"><input st-search="" class="form-control" placeholder="Global Search ..."
@@ -41,6 +36,7 @@
             </tr>
             <tr>
               <th></th>
+              <th>Assign ID</th>
               <th>Form ID</th>
               <th>Inspector</th>
               <th>Schedule Date</th>
@@ -53,17 +49,23 @@
               ng-repeat="objdetails in obj.tempObj | filter: obj.objFilter track by objdetails.id">
 
               <td>
-                <button ng-click="obj.assignForm(objdetails.id)" type="button"
-                        ng-show="objdetails.status == 'pending'"
+                <button ng-click="obj.recheckForm(objdetails.assocForm)" type="button"
+                        ng-show="objdetails.status == 'completed'"
                         class="btn btn-sm btn-success">
                   <em class="fa fa-arrow-circle-right"></em>
                 </button>
-                <button ng-click="obj.rejectForm(objdetails.id)" type="button"
-                        ng-show="objdetails.status == 'pending'"
+                <button ng-click="obj.confirmForm(objdetails)" type="button"
+                        ng-show="objdetails.status == 'completed'"
+                        class="btn btn-sm btn-danger">
+                  <em class="fa fa-close"></em>
+                </button>
+                <button ng-click="obj.rejectForm(objdetails.assocForm)" type="button"
+                        ng-show="objdetails.status == 'completed'"
                         class="btn btn-sm btn-danger">
                   <em class="fa fa-close"></em>
                 </button>
               </td>
+              <td>{{objdetails.id}}</td>
               <td>{{objdetails.assocForm}}</td>
               <td>{{objdetails.assocInspector.name}}</td>
               <td>{{objdetails.scheduledDate}}</td>

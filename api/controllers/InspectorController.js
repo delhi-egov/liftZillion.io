@@ -82,8 +82,9 @@ module.exports = {
   submitReport: function (req, res) {
     var decoded = jsonwebtoken.decode(req.headers.access_token);
     var assignId = req.body.assignId;
+    var completedOn = req.body.completedOn;
     var reportId = '';
-    if (assignId) {
+    if (assignId && completedOn) {
       req.body.assocInspector = decoded.id;
       InspectorReport.create(req.body).exec(function createReport(err, obj) {
         if (err) {
@@ -95,11 +96,32 @@ module.exports = {
               res.status(403).send({status: "failed", message: "Report Submission Failed 2"});
             } else {
               assign.status = 'completed';
+              assign.completedOn = completedOn;
               assign.assocReport = reportId;
               assign.save();
               res.status(status.ACCEPTED).send({status: "success", message: "report Submission Success"});
             }
           });
+        }
+      });
+    } else {
+      res.status(403).send({status: "failed", message: "Insufficient Details"});
+    }
+  },
+  schedule: function (req, res) {
+    var decoded = jsonwebtoken.decode(req.headers.access_token);
+    var assignId = req.body.assignId;
+    var scheduledDate = req.body.scheduledDate;
+    var reportId = '';
+    if (assignId && scheduledDate) {
+      Assign.findOne({id: assignId}).exec(function (err, assign) {
+        if (err) {
+          res.status(403).send({status: "failed", message: "Report Submission Failed 2"});
+        } else {
+          assign.status = 'scheduled';
+          assign.scheduledDate = scheduledDate;
+          assign.save();
+          res.status(status.ACCEPTED).send({status: "success", message: "Inspection Schedule Success"});
         }
       });
     } else {

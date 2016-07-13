@@ -89,7 +89,9 @@ module.exports.policies = {
     'login': 'login',
     'changePswd': 'inspector',
     'fetchAssignedForms': 'inspector',
-    'submitReport': 'inspector'
+    'submitReport': 'inspector',
+    'schedule': 'inspector'
+
   }
 
 
