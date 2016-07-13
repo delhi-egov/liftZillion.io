@@ -77,7 +77,7 @@ module.exports = {
     /*{
      assocForm:1
      }*/
-    if (req.body.assocForm) {
+    if (req.body.assocForm && req.body.assignId) {
       FormA.findOne({id: req.body.assocForm}).exec(function confrmForm(err, obj) {
         if (err) {
           res.status(403).send({status: "failed", message: "2"});
@@ -85,7 +85,19 @@ module.exports = {
           obj.status = 'confirmed';
           obj.save();
           console.log("-- deputy_confirmed_form : " + obj.id + "  --");
-          res.status(status.ACCEPTED).send({status: "success", message: "Form Confirmed Successfully"});
+
+          Assign.findOne({id: req.body.assignId}).exec(function (err, obj) {
+            console.log("@@@@@@");
+            if (err) {
+              res.status(403).send({status: "failed", message: "3"});
+            } else {
+              console.log(obj.status);
+              console.log("#####");
+              obj.status = "finished";
+              obj.save();
+              res.status(status.ACCEPTED).send({status: "success", message: "Form Confirmed Successfully"});
+            }
+          });
         }
       });
     } else {
@@ -195,7 +207,7 @@ module.exports = {
   },
   fetchAssigned: function (req, res) {
     var decoded = jsonwebtoken.decode(req.headers.access_token);
-    Assign.find({assocDeputyId: decoded.id}).populate('assocInspector', 'assocReport').exec(function (err, obj) {
+    Assign.find({assocDeputyId: decoded.id}).populate('assocInspector').populate('assocReport').exec(function (err, obj) {
       if (err) {
         res.status(403).send({status: "failed", message: "No Form Assigned"});
       } else {

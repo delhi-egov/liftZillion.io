@@ -22,8 +22,6 @@ function FormaController(FormaRangular, verifyLoginService, Restangular) {
     form.post({}, {}, {'access_token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiZW1haWwiOiJoYXJpb21AemlsbGlvbi5pbyIsImlhdCI6MTQ2ODI0MjY4NH0.qNFWrPlwyRuvKU78UDsBp7d7dNTAIY6x0780OmC2zU0'}).then(function (data) {
       console.log(data);
       scope.origObj = data;
-      /*fsdc.origObj = data;
-       VerifyLoginService.catId = null;*/
     });
   };
 

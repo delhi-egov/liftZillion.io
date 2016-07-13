@@ -25,7 +25,7 @@ module.exports = {
 
     status: {
       type: 'string',
-      enum: ['pending', 'scheduled', 'completed'],
+      enum: ['pending', 'scheduled', 'completed', 'finished'],
       defaultsTo: 'pending'
     },
 
