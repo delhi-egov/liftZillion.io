@@ -10,6 +10,8 @@
 
     var dataHolder = this;
 
+    dataHolder.adminPageStats = {origData: []}
+
     dataHolder.orders = [];
     var dataTableCallbacks = [];
     dataHolder.registerTableCallback = function (callback) {

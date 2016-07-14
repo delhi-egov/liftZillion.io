@@ -214,6 +214,16 @@ module.exports = {
         res.status(status.ACCEPTED).send(obj);
       }
     });
+  },
+  fetchInspectorList: function (req, res) {
+    var decoded = jsonwebtoken.decode(req.headers.access_token);
+    Inspector.find().exec(function (err, obj) {
+      if (err) {
+        res.status(403).send({status: "failed", message: "Error"});
+      } else {
+        res.status(status.ACCEPTED).send(obj);
+      }
+    });
   }
 };
 
