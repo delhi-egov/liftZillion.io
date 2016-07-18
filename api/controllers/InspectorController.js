@@ -127,6 +127,34 @@ module.exports = {
     } else {
       res.status(403).send({status: "failed", message: "Insufficient Details"});
     }
+  },
+  getForm: function (req, res) {
+    var decoded = jsonwebtoken.decode(req.headers.access_token);
+    var formId = req.body.formId;
+    var found = false;
+    var foundForm = [];
+    if (formId) {
+      Assign.find({assocInspector: decoded.id}).populate('assocForm').exec(function (err, obj) {
+        if (err) {
+          res.status(status.ACCEPTED).send([]);
+        } else {
+          // res.status(status.ACCEPTED).send(obj[0].assocForm);
+          for (var i = 0; i < obj.length; i++) {
+           if (obj[i].assocForm.id == formId) {
+           found = true;
+           foundForm.push(obj[i]);
+           }
+           }
+           if (found) {
+           res.status(status.ACCEPTED).send(foundForm);
+           } else {
+           res.status(status.ACCEPTED).send([]);
+           }
+        }
+      });
+    } else {
+      res.status(403).send({status: "failed", message: "Insufficient Details"});
+    }
   }
 };
 
